@@ -21,15 +21,12 @@ export default function Home() {
       const type = await getMobileNetworkType();
       setNetworkType(type);
 
-      // For now, let's simulate detecting the connection mode.  In a real
-      // application, this would involve actual device communication logic.
-      const modes: ConnectionMode[] = ['USB', 'Wi-Fi', 'Bluetooth'];
-      const randomMode = modes[Math.floor(Math.random() * modes.length)];
-      setConnectionMode(randomMode);
+      // Assume Wi-Fi connection when the mobile device and laptop are on the same network.
+      setConnectionMode('Wi-Fi');
 
       toast({
         title: `Connected to ${type}`,
-        description: `Current network status: ${type} via ${randomMode}`,
+        description: `Current network status: ${type} via Wi-Fi`,
       });
     } catch (error) {
       toast({
