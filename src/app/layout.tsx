@@ -1,18 +1,7 @@
 
 import type {Metadata} from 'next';
-import {GeistSans, GeistMono} from 'geist/ui';
 import './globals.css';
 import {Toaster} from '@/components/ui/toaster';
-
-const geistSans = GeistSans({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-});
-
-const geistMono = GeistMono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
-});
 
 export const metadata: Metadata = {
   title: 'HeavenFall',
@@ -26,11 +15,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body className="antialiased">
         {children}
         <Toaster />
       </body>
     </html>
   );
 }
-
