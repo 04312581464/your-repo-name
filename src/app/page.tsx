@@ -48,7 +48,7 @@ export default function Home() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-background">
       <h1 className="text-3xl font-semibold text-foreground mb-4">
-        NetAlert
+        HeavenFall
       </h1>
       <p className="text-muted-foreground">
         Desktop notifier for mobile network type (4G or 5G).
@@ -68,6 +68,9 @@ export default function Home() {
           </p>
         </div>
       )}
+         <footer className="mt-8 text-xs text-muted-foreground">
+        Made by Lalit ❤️
+      </footer>
     </div>
   );
 }

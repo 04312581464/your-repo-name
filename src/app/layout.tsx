@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'NetAlert',
+  title: 'HeavenFall',
   description: 'Desktop notifier for mobile network type',
 };
 
@@ -32,3 +32,4 @@ export default function RootLayout({
     </html>
   );
 }
+
