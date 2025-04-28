@@ -5,17 +5,29 @@ import { useToast } from "@/hooks/use-toast";
 import { getMobileNetworkType } from '@/services/mobile-connection';
 
 const POLL_INTERVAL = 30 * 60 * 1000; // 30 minutes
+
+// Define the type for connection mode
+type ConnectionMode = 'USB' | 'Wi-Fi' | 'Bluetooth' | null;
+
 export default function Home() {
   const { toast } = useToast();
   const [networkType, setNetworkType] = useState<string | null>(null);
+  // State to store the connection mode
+  const [connectionMode, setConnectionMode] = useState<ConnectionMode>(null);
 
   const checkNetworkStatus = async () => {
     try {
       const type = await getMobileNetworkType();
       setNetworkType(type);
+      // For now, let's simulate detecting the connection mode.  In a real
+      // application, this would involve actual device communication logic.
+      const modes: ConnectionMode[] = ['USB', 'Wi-Fi', 'Bluetooth'];
+      const randomMode = modes[Math.floor(Math.random() * modes.length)];
+      setConnectionMode(randomMode);
+
       toast({
         title: `Connected to ${type}`,
-        description: `Current network status: ${type}`,
+        description: `Current network status: ${type} via ${randomMode}`,
       });
     } catch (error) {
       toast({
@@ -48,6 +60,15 @@ export default function Home() {
           </p>
         </div>
       )}
+       {/* Display the connection mode */}
+      {connectionMode && (
+        <div className="mt-2">
+          <p className="text-sm text-foreground">
+            Connection Mode: {connectionMode}
+          </p>
+        </div>
+      )}
     </div>
   );
 }
+
