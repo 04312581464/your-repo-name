@@ -12,6 +12,7 @@ type ConnectionMode = 'USB' | 'Wi-Fi' | 'Bluetooth' | null;
 export default function Home() {
   const { toast } = useToast();
   const [networkType, setNetworkType] = useState<string | null>(null);
+  const [prevNetworkType, setPrevNetworkType] = useState<string | null>(null);
   // State to store the connection mode
   const [connectionMode, setConnectionMode] = useState<ConnectionMode>(null);
 
@@ -19,6 +20,7 @@ export default function Home() {
     try {
       const type = await getMobileNetworkType();
       setNetworkType(type);
+
       // For now, let's simulate detecting the connection mode.  In a real
       // application, this would involve actual device communication logic.
       const modes: ConnectionMode[] = ['USB', 'Wi-Fi', 'Bluetooth'];
@@ -45,6 +47,17 @@ export default function Home() {
 
     return () => clearInterval(intervalId); // Cleanup on unmount
   }, [toast]);
+
+  // Effect to check for network type changes
+  useEffect(() => {
+    if (networkType && prevNetworkType && networkType !== prevNetworkType) {
+      toast({
+        title: "Network Type Changed",
+        description: `Network changed from ${prevNetworkType} to ${networkType}`,
+      });
+    }
+    setPrevNetworkType(networkType);
+  }, [networkType, prevNetworkType, toast]);
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-background">
       <h1 className="text-3xl font-semibold text-foreground mb-4">
@@ -74,4 +87,3 @@ export default function Home() {
     </div>
   );
 }
-
